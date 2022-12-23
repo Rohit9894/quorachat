@@ -56,7 +56,7 @@ export default function AuthLogin() {
       return;
     }
 
-    return fetch("https://quorachat-zv1b.vercel.app//api/auth/login", {
+    return fetch("http://localhost:3000/api/auth/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
