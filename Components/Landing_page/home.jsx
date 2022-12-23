@@ -1,14 +1,15 @@
 import { Box, Grid, GridItem } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { Postcard } from "./Postcard";
-export default function Dashboard() {
-  const [data, setData] = useState([]);
-  useEffect(() => {
-    fetch("http://localhost:3000/api/posts/all")
-      .then((res) => res.json())
-      .then((res) => setData(res))
-      .catch((err) => err);
-  }, []);
+export default function Dashboard({ data }) {
+  console.log(data);
+  // const [data, setData] = useState([]);
+  // useEffect(() => {
+  //   fetch("http://localhost:3000/api/posts/all")
+  //     .then((res) => res.json())
+  //     .then((res) => setData(res))
+  //     .catch((err) => err);
+  // }, []);
   return (
     <Box
       pt="70px"
@@ -16,7 +17,7 @@ export default function Dashboard() {
       m={{ base: "auto", md: "auto" }}
     >
       <Grid emplateColumns={{ base: "repeat(1, 1fr)", xl: "repeat(2,1fr)" }}>
-        {data.map((e, i) => {
+        {data?.map((e, i) => {
           return (
             <GridItem>
               <Postcard key={i + 1} data={e} />
@@ -27,3 +28,11 @@ export default function Dashboard() {
     </Box>
   );
 }
+export const getServerSideProps = async () => {
+  const res = await fetch("http://localhost:3000/api/posts/all");
+  let data = await res.json();
+
+  return {
+    props: data,
+  };
+};
