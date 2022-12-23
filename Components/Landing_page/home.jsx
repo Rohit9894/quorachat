@@ -4,7 +4,7 @@ import { Postcard } from "./Postcard";
 export default function Dashboard() {
   const [data, setData] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:3000/api/posts/all")
+    fetch("https://quorachat.vercel.app/api/posts/all")
       .then((res) => res.json())
       .then((res) => setData(res))
       .catch((err) => err);
