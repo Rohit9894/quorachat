@@ -16,6 +16,7 @@ export default async function Login(req, res) {
             id: get_user._id,
             name: get_user.name,
             role: get_user.role,
+            email: get_user.email,
           },
           sign,
           { expiresIn: "7 days" }

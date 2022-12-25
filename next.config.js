@@ -3,7 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   env: {
     mongodburl:
-      "mongodb+srv://Nazia:Dob1062000@cluster0.p4xc33c.mongodb.net/Blogging?retryWrites=true&w=majority",
+      "mongodb+srv://r:g@cluster0.ux5ulof.mongodb.net/Quora?retryWrites=true&w=majority",
     sign: "SECRET1234",
   },
 };

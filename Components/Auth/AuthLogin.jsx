@@ -17,7 +17,8 @@ import {
   Input,
   useToast,
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../AuthContext/AuthContext";
 import AuthSignUp from "./AuthSignUp";
 const initValue = {
   email: "",
@@ -26,8 +27,9 @@ const initValue = {
 export default function AuthLogin() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [formState, setFormState] = useState(initValue);
-  const [login, setLogin] = useState(false);
+  const [details, setDetails] = useState({ name: "", email: "" });
   const toast = useToast();
+  const { loginUser, isAuth } = useContext(AuthContext);
   function handleChange(e) {
     const { name, value } = e.target;
     setFormState({
@@ -65,7 +67,7 @@ export default function AuthLogin() {
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
+        loginUser();
         if (res.msg === "Login sucessfully") {
           toast({
             title: "success",
@@ -81,7 +83,7 @@ export default function AuthLogin() {
             "details",
             JSON.stringify({ name: res.name, email: res.email })
           );
-          click();
+
           return;
         }
         if (res.msg === "password incorrect") {
@@ -112,16 +114,18 @@ export default function AuthLogin() {
       });
   }
 
-  function click() {
-    const login = JSON.parse(localStorage.getItem("details")) || "";
-    if (login) {
-      setLogin(true);
-    }
-  }
+  //   ;
+
+  useEffect(() => {
+    
+    const data = JSON.parse(localStorage.getItem("details")) || "";
+    setDetails(data);
+  }, [isAuth]);
+
   return (
     <>
       <Text fontSize={"20px"} cursor={"pointer"} onClick={onOpen}>
-        {login ? "Log out" : "Login"}
+        {details || isAuth ? details.name : "Login"}
       </Text>
 
       <Modal isOpen={isOpen} onClose={onClose}>

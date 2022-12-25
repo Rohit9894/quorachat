@@ -25,7 +25,7 @@ import styles from "./navbar.module.css";
 function Navbar() {
   return (
     <div>
-      <Box>
+      <Box pb="60px">
         <Flex
           w="100%"
           bg="#011627"

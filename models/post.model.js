@@ -1,10 +1,11 @@
 import { model, models, Schema } from "mongoose";
 const postSchema = new Schema({
-  category: String,
+  name: String,
+  user_name: String,
   title: String,
   image: String,
+  category: String,
   content: String,
   like: Number,
-  user_name: String,
 });
 export default models.post || model("post", postSchema);
